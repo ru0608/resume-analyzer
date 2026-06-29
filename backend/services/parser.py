@@ -34,10 +34,11 @@ async def parse_pdf(file_path: str) -> Tuple[str, int]:
         if text:
             pages_text.append(text)
 
+    page_count = doc.page_count
     doc.close()
 
     if not pages_text:
         raise ValueError("未能从 PDF 中提取到任何文本内容")
 
     raw_text = "\n\n".join(pages_text)
-    return raw_text, doc.page_count
+    return raw_text, page_count

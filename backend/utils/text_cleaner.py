@@ -21,15 +21,16 @@ def clean_text(text: str) -> str:
     # 替换零宽字符和不可见控制字符
     text = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f​-‏ - ﻿]', '', text)
 
-    # 合并被换行截断的中文（行尾非句末标点且下一行非空行）
-    text = re.sub(r'(?<![。！？；\n])\n(?![ \n])', '', text)
-
     # 规范化换行：多个换行符合并为两个
     text = re.sub(r'\n{3,}', '\n\n', text)
 
     # 去除每行首尾空白
     lines = [line.strip() for line in text.split('\n')]
     text = '\n'.join(lines)
+
+    # 合并被换行截断的短行（如行尾无标点且下一行长度 > 30，属于自然换行）
+    # 保留简历中单行字段之间的换行，避免把整份简历合并成一段
+    text = re.sub(r'(?<![。！？；：、，)\n])\n(?=[a-zA-Z0-9\(（\-])', '', text)
 
     # 规范化空格：多个空格合并为一个
     text = re.sub(r'[ \t]+', ' ', text)

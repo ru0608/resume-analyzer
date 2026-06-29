@@ -147,32 +147,44 @@ def _fallback_extract(text: str) -> ExtractedInfo:
     email = None
     address = None
 
-    # 电话：支持大陆手机号和座机号
-    phone_match = re.search(r'(?:电话|手机|联系电话|Tel|Phone)[:：\s]*(\+?\d{2,3}[-\s]?)?(1[3-9]\d{9}|\d{3,4}[-\s]?\d{7,8})', text)
+    # --- 电话 ---
+    # 先尝试从字段标签提取：电话: 138-0000-1234
+    phone_match = re.search(
+        r'(?:电话|手机|联系电话|Tel|Phone)[:：\s]*'
+        r'(\+?\d{2,3}[-\s]?)?'
+        r'(1[3-9][-\s]?\d[-\s]?\d[-\s]?\d[-\s]?\d[-\s]?\d[-\s]?\d[-\s]?\d[-\s]?\d[-\s]?\d)',
+        text,
+    )
     if phone_match:
-        phone = phone_match.group(2) or phone_match.group(0).split(":")[-1].strip()
+        raw = phone_match.group(2) or phone_match.group(0).split(":")[-1].strip()
+        phone = re.sub(r'[-\s]', '', raw)  # 去除连字符和空格，统一格式
     else:
-        # 直接匹配手机号
+        # 直接匹配纯数字手机号（11位）
         phone_match2 = re.search(r'1[3-9]\d{9}', text)
         if phone_match2:
             phone = phone_match2.group(0)
 
-    # 邮箱
+    # --- 邮箱 ---
     email_match = re.search(r'[\w.+-]+@[\w-]+\.[\w.-]+', text)
     if email_match:
         email = email_match.group(0)
 
-    # 姓名：通常在简历开头
-    lines = text.strip().split('\n')
-    if lines:
-        first_line = lines[0].strip()
-        # 姓名一般是 2-4 个中文字符，且不包含特殊字符
-        name_match = re.match(r'^[一-鿿]{2,4}$', first_line)
-        if name_match:
-            name = name_match.group(0)
+    # --- 姓名 ---
+    # 找"姓名"标签后的内容，或简历第一行纯中文
+    name_from_label = re.search(r'(?:姓名|Name)[:：\s]*([一-鿿]{2,4})', text)
+    if name_from_label:
+        name = name_from_label.group(1)
+    else:
+        lines = text.strip().split('\n')
+        if lines:
+            first_line = lines[0].strip()
+            # 姓名一般是 2-4 个中文字符
+            name_match = re.match(r'^[一-鿿·]{2,6}$', first_line)
+            if name_match:
+                name = name_match.group(0)
 
-    # 地址
-    address_match = re.search(r'(?:地址|现居|居住地|Location)[:：\s]*(.+?)$', text, re.MULTILINE)
+    # --- 地址 ---
+    address_match = re.search(r'(?:地址|现居|居住地|Location)[:：\s]*([^\n]+)', text)
     if address_match:
         address = address_match.group(1).strip()
 
