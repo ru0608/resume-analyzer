@@ -1,0 +1,430 @@
+/* 全局样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif;
+  background: #f0f4f8;
+  color: #1a202c;
+  line-height: 1.6;
+}
+
+/* 应用容器 */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 头部 */
+.app-header {
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  color: white;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.app-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.app-header p {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+/* 主要内容 */
+.app-main {
+  flex: 1;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* 错误横幅 */
+.error-banner {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #dc2626;
+  font-size: 14px;
+}
+
+.error-banner button {
+  background: none;
+  border: none;
+  color: #dc2626;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0 4px;
+}
+
+/* 步骤指示器 */
+.steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 32px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  background: #d1d5db;
+  color: #6b7280;
+  transition: all 0.3s;
+}
+
+.step.active .step-number {
+  background: #3b82f6;
+  color: white;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+.step.completed .step-number {
+  background: #22c55e;
+  color: white;
+}
+
+.step-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #9ca3af;
+  display: none;
+}
+
+.step.active .step-label,
+.step.completed .step-label {
+  display: inline;
+  color: #374151;
+}
+
+.step-line {
+  width: 48px;
+  height: 2px;
+  background: #d1d5db;
+  margin: 0 8px;
+}
+
+/* 卡片 */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.card h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #1e293b;
+}
+
+.card .hint {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+/* 文件上传区域 */
+.file-upload-area {
+  margin-bottom: 20px;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #64748b;
+  transition: all 0.2s;
+  background: #f8fafc;
+}
+
+.file-label:hover {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.file-selected {
+  color: #1e293b;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+/* 信息预览 */
+.info-preview {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.info-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 15px;
+  color: #1e293b;
+}
+
+.extra-info {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+/* 岗位需求输入 */
+.jd-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  line-height: 1.6;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+
+.jd-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.jd-input::placeholder {
+  color: #9ca3af;
+}
+
+/* 按钮组 */
+.btn-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* 按钮 */
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #3b82f6;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: #475569;
+  width: auto;
+}
+
+.btn-secondary:hover {
+  background: #cbd5e1;
+}
+
+/* 评分概览 */
+.score-overview {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.score-ring {
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+
+.score-ring-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.score-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.score-value {
+  font-size: 36px;
+  font-weight: 700;
+  display: block;
+  line-height: 1;
+  color: var(--score-color);
+}
+
+.score-unit {
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* 各维度评分 */
+.dimensions {
+  margin-top: 24px;
+}
+
+.dimensions h3,
+.analysis h3,
+.job-summary h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #1e293b;
+}
+
+.dimension-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dimension-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dimension-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.dimension-label {
+  color: #475569;
+  font-weight: 500;
+}
+
+.dimension-value {
+  font-weight: 600;
+}
+
+.dimension-track {
+  height: 10px;
+  background: #e5e7eb;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.dimension-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.8s ease;
+}
+
+/* 分析总结 */
+.analysis,
+.job-summary {
+  margin-top: 24px;
+  padding: 16px;
+  background: #f0fdf4;
+  border-radius: 8px;
+  border-left: 4px solid #22c55e;
+}
+
+.analysis p,
+.job-summary p {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.7;
+}
+
+.job-summary {
+  background: #eff6ff;
+  border-left-color: #3b82f6;
+}
+
+/* 底部 */
+.app-footer {
+  text-align: center;
+  padding: 24px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* 响应式 */
+@media (max-width: 640px) {
+  .app-header h1 { font-size: 22px; }
+  .card { padding: 20px; }
+  .info-grid { grid-template-columns: 1fr; }
+  .btn-group { flex-direction: column; }
+  .btn-secondary { width: 100%; }
+}
