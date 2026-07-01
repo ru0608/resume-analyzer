@@ -43,14 +43,5 @@ async def health_check():
     return {"status": "healthy"}
 
 
-# 阿里云函数计算入口
-def handler(environ, start_response):
-    """FC 函数计算入口适配"""
-    from urllib.parse import parse_qs
-    from io import BytesIO
-
-    # 简单 FC 适配：生产环境建议使用 Web 框架适配层
-    status = "200 OK"
-    response_headers = [("Content-type", "application/json; charset=utf-8")]
-    start_response(status, response_headers)
-    return [b'{"service": "resume-analyzer", "status": "running"}']
+# 阿里云函数计算入口（自定义容器模式不需要此 handler，使用 uvicorn 直接启动）
+# 如使用 Python Runtime (ZIP 上传) 方式部署，请参考 DEPLOY_FC.md

@@ -136,19 +136,26 @@ npm run dev
 
 ## 部署
 
+## 部署
+
 ### 后端 - 阿里云函数计算 FC
 
-1. 将 `backend/` 目录打包部署到阿里云 FC
-2. 设置环境变量 `DASHSCOPE_API_KEY`
-3. 配置 FC 触发器为 HTTP 触发器
-4. 更新前端 `src/api.js` 中的 `API_BASE` 为 FC 域名
+完整部署步骤请查看 [DEPLOY_FC.md](./DEPLOY_FC.md)（自定义容器 或 ZIP 上传）。
+
+快速指引：
+1. 构建 Docker 镜像 → 推送到阿里云容器镜像服务
+2. 在函数计算控制台创建函数（自定义容器）
+3. 设置环境变量 `DASHSCOPE_API_KEY`
+4. 获取公网 URL
 
 ### 前端 - GitHub Pages
 
 ```bash
+# 构建前端，API 指向已部署的后端地址
 cd frontend
-npm run build
-# 将 dist/ 目录部署到 GitHub Pages
+VITE_API_BASE=https://你的FC域名 npm run build
+
+# 将 dist/ 目录部署到 GitHub Pages（gh-pages 分支）
 ```
 
 ## 评分方案
