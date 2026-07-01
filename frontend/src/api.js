@@ -4,10 +4,11 @@
  *
  * 后端地址优先级：
  * 1. 构建时指定：VITE_API_BASE=https://xxx npm run build
- * 2. 开发环境默认：http://localhost:8000
+ * 2. 生产环境默认：Render 后端地址
+ * 3. 开发环境默认：http://localhost:8000
  */
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000';
+const API_BASE = import.meta.env.VITE_API_BASE || 'https://resume-analyzer-fy3c.onrender.com';
 
 /**
  * 上传简历 PDF 文件
