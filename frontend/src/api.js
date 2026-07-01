@@ -1,9 +1,12 @@
 /**
  * API 服务模块
  * 封装与后端的所有 HTTP 请求
+ *
+ * 后端地址优先级：
+ * 1. 构建时指定：VITE_API_BASE=https://xxx npm run build
+ * 2. 开发环境默认：http://localhost:8000
  */
 
-// 后端地址：本地开发使用 localhost，生产环境替换为 FC 域名
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000';
 
 /**

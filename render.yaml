@@ -1,0 +1,20 @@
+# 智能简历分析系统 - Render Blueprint 部署配置
+# 使用此文件可实现一键部署后端服务
+
+services:
+  # 后端 Web 服务
+  - type: web
+    name: resume-analyzer
+    runtime: python
+    repo: https://github.com/ru0608/resume-analyzer
+    branch: main
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port ${PORT:-8000}
+    healthCheckPath: /health
+    envVars:
+      - key: DASHSCOPE_API_KEY
+        sync: false  # 部署时手动填写
+      - key: DASHSCOPE_MODEL
+        value: qwen-plus
+    plan: free

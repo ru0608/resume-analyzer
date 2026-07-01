@@ -136,27 +136,16 @@ npm run dev
 
 ## 部署
 
-## 部署
+### 完整部署指南
 
-### 后端 - 阿里云函数计算 FC
+查看 [DEPLOY.md](./DEPLOY.md) 获取详细的部署步骤。
 
-完整部署步骤请查看 [DEPLOY_FC.md](./DEPLOY_FC.md)（自定义容器 或 ZIP 上传）。
+快速概览：
 
-快速指引：
-1. 构建 Docker 镜像 → 推送到阿里云容器镜像服务
-2. 在函数计算控制台创建函数（自定义容器）
-3. 设置环境变量 `DASHSCOPE_API_KEY`
-4. 获取公网 URL
-
-### 前端 - GitHub Pages
-
-```bash
-# 构建前端，API 指向已部署的后端地址
-cd frontend
-VITE_API_BASE=https://你的FC域名 npm run build
-
-# 将 dist/ 目录部署到 GitHub Pages（gh-pages 分支）
-```
+1. 注册 [Render.com](https://dashboard.render.com/register)（用 GitHub 登录）
+2. 一键部署后端 Web Service
+3. 告知我 Render 后端地址，我更新前端构建
+4. 面试官访问 GitHub Pages 演示地址即可验收
 
 ## 评分方案
 
